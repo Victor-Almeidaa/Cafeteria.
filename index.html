@@ -10,8 +10,21 @@
 <body>
 <div class="topo">
     <img src="img/logo.ico" alt="Logo do site">
-    <p><a href="#informacoes">INFORMAÇÕES</a> <a href="#contatos">CONTATOS</a> <a href="#horarios">HORÁRIOS</a></p>
+    <p class="menu-desktop"><a href="#informacoes">INFORMAÇÕES</a> <a href="#contatos">CONTATOS</a> <a href="#horarios">HORÁRIOS</a></p>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 </div>
+
+<nav class="menu-mobile" id="menuMobile" aria-label="Menu de navegação">
+    <button class="menu-close" id="menuClose" aria-label="Fechar menu">&times;</button>
+    <a href="#informacoes">INFORMAÇÕES</a>
+    <a href="#contatos">CONTATOS</a>
+    <a href="#horarios">HORÁRIOS</a>
+</nav>
+<div class="overlay" id="overlay"></div>
 
     <div id="banner" class="banner">
 
@@ -141,5 +154,33 @@ vai depender da torra, quanto mais clara ela for, maior será a acidez.</p>
         <p>Desenvolvido por <span class="destaque-nome">Victor Almeida - Junior Developer</span></p>
        <a href="#banner"><img src="img/seta-para-cima.png" alt="voltar ao topo"></a>
     </div>
+<script>
+(function() {
+    var toggle = document.getElementById('menuToggle');
+    var menu = document.getElementById('menuMobile');
+    var closeBtn = document.getElementById('menuClose');
+    var overlay = document.getElementById('overlay');
+    var links = menu.querySelectorAll('a');
+
+    function openMenu() {
+        menu.classList.add('active');
+        overlay.classList.add('active');
+        toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+        menu.classList.remove('active');
+        overlay.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    links.forEach(function(link) {
+        link.addEventListener('click', closeMenu);
+    });
+})();
+</script>
 </body>
 </html>
